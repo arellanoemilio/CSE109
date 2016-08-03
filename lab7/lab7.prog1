@@ -1,0 +1,24 @@
+x
+sumpos
+sumneg
+
+begin
+sumpos = 0
+sumneg = 0
+loop:
+read x
+if x > 0 goto loopsum
+if x <= 0 goto loopneg
+loopsum:
+sumpos = sumpos + x
+goto loop
+loopneg:
+x = x*x*x
+sumneg = sumneg +x
+if x != 0 goto loop
+write sumpos
+write sumneg
+halt
+end
+4 -4 6 5 -3 -4 0
+

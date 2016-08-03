@@ -1,0 +1,7 @@
+x
+y
+begin
+goto jack
+halt
+jack: write 23
+end

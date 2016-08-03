@@ -1,0 +1,72 @@
+CSE 109 Laboratory 6   
+
+In the subdirectory /proj/csc109/lab6  we have stored the files
+bugs.cc. and CSE109Lab6.txt. Create a subdirectory csc109.151/lab6
+and copy these files into that subdirectory. CSE109Lab6.txt contains a
+copy of this text. Program bugs.cc has three bugs, depending on whether the
+user inputs 1, 2, or 3. The program bugs.cc must be compiled by
+hand. Compile bugs.cc with the -g option and then use gdb to find
+the bugs. Below, give a short diagnosis of each of the bugs in bugs.cc.
+Note, this is an exercise in using gdb. So, DO NOT examine the code in
+detail, looking for the problem. Instead, use gdb to find it.  Your diagnosis
+should explain what happened and, more interesting, why it happened.
+After diagnosing the bugs, answer the questions at the bottom of the page,
+using gdb. Edit the fileCSE109Lab6.txt,  filling in your answers. We
+will collect the file CSE109Lab6.txt from your directory.
+
+Diagnosis: bugs.cc - User input 1
+
+Program received signal SIGSEGV, Segmentation fault.
+do_lookup_x (new_hash=2036321147, old_hash=0x7fffffffdf68, ref=<value optimized out>, result=0x7fffffffdf50, scope=<value optimized out>, i=0, flags=1, skip=0x0, undef_map=0x34be221188) at dl-lookup.c:110
+110	      if (map->l_removed)
+
+the segme3ntation fault occurs when the program tries to assign a value to the
+int array pointer. the reason for this is because the variable x has only been
+declared but has not yet been initialized so the pointer x is not pointing to 
+anything and has no idea it is an array.
+
+
+Diagnosis: bugs.cc - User input 2
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000400a7e in fac (n=Cannot access memory at address 0x7fffff3feffc
+) at bugs.cc:40
+
+The segmentation fault occurs because the recursive methode will never reach its
+base case because the input in is negative. to solve it the if statement should 
+be switched to n>0.
+
+Diagnosis: bugs.cc - User input 3 (note: ^C stops infinite loops)
+
+What is the value of i and x[i] after each of the first ten iterations
+of the loop in three()?
+
+the reason why it becomes an infinite loop is because when the for loop tries to
+assign a value to x[5] it gets out of the boundries of the array and in reality it
+writes into the memory location of i making the program go back into the loop and
+reassigning i multiple times
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+Some gdb commands
+  list               list lines of code
+  run                run the program
+  step               execute one instruction
+  next               execute one line \
+  break <fnc>        set break point at beginning of funtion <fnc>
+  break <num>        set break point at statement number <num>
+  cont               continue
+  bt                 (after a crash) show backtrace of call stack
+  print <var>        display contents of structure <var>
+
